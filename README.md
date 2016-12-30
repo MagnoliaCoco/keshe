@@ -1,6 +1,6 @@
 ### mysql 
-- [ ]user
-- [ ]role
-- [ ]retribution
-- [ ]publish
-- [ ]dic
+- user
+- role
+- retribution
+- publish
+- dic
