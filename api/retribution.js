@@ -1,24 +1,23 @@
 let db = require('../database')
 
-let usersearch = (req, res) => {
+let research = (req, res) => {
     if (typeof req.query.id === "undefined") {
-        db.conn.query('select * from user', function(err, rows) {
+        db.conn.query('select * from retribution', function(err, rows) {
             res.send(err || rows);
         });
     } else {
         db.conn.query({
-            sql: 'select * from user where user_uuid=?',
+            sql: 'select * from retribution where area_number=?',
             values: [req.query.id]
         }, function(err, rows) {
             res.send(err || rows);
         });
     }
 }
-let userinsert = () => {
-    
-}
-let user = {
-    usersearch: usersearch,
+
+let retribution = {
+    research: research,
+
 };
 
-module.exports = user;
+module.exports = retribution;

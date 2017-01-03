@@ -1,9 +1,12 @@
 const express = require('express');
 let app = express();
-app.get('/', function(req, res) {
-    res.send({ status: 'ok' });
-});
 
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+});
 app.use('/api', require('./api/index'));
+app.use('/', express.static('./view/build'));
 
 app.listen(80);
+console.log('running at localhost:80');
