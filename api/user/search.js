@@ -1,24 +1,22 @@
-let db = require('../database')
+let db = require('../../database')
 
 let usersearch = (req, res) => {
-    if (typeof req.query.id === "undefined") {
+    if (typeof req.query.uuid === "undefined") {
         db.conn.query('select * from user', function(err, rows) {
             res.send(err || rows);
         });
     } else {
         db.conn.query({
             sql: 'select * from user where user_uuid=?',
-            values: [req.query.id]
+            values: [req.query.uuid]
         }, function(err, rows) {
             res.send(err || rows);
         });
     }
 }
-let userinsert = () => {
-    
-}
-let user = {
-    usersearch: usersearch,
+
+let search = {
+    usersearch: usersearch
 };
 
-module.exports = user;
+module.exports = search;
