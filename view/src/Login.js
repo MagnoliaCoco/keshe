@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import config from './config';
 import ajax from './ajax';
 import User from './User';
 import Retribution from './Retribution';
@@ -17,7 +18,7 @@ class Login extends Component{
         let ele = document.querySelector('#loginform');
         let domData = ele.querySelectorAll('input');
         let query = Array.from(domData).map(domElem => `${domElem.name}=${domElem.value}`).join('&');
-        let url = 'http://localhost/api/user/login?' + query
+        let url = `${config.api}/user/login?${query}`
         ajax({
             url: url,
             type: 'GET',
@@ -39,11 +40,11 @@ class Login extends Component{
     render = () => {
         return <div id="loginform" key="loginform" >
             <div  className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" >
-                <input type="text" name="loginname" key="loginname" className="mdl-textfield__input"/>
+                <input type="text" name="loginname" key="loginname" className="mdl-textfield__input" defaultValue="a"/>
                 <lable className="mdl-textfield__label">loginname: </lable>
             </div>
             <div  className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" >
-                <input type="text" name="loginpassword" key="loginpassword" className="mdl-textfield__input"/>
+                <input type="text" name="loginpassword" key="loginpassword" className="mdl-textfield__input" defaultValue="0"/>
                 <lable className="mdl-textfield__label">loginpassword: </lable>
             </div>
                 <button id="login_but" className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" key="login" onClick={() => {this.handleClick(); return false;}}>Submit</button>

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import ajax from './ajax';
+import config from './config';
+
 class Retribution extends Component {
     constructor(){
         super();
@@ -11,7 +13,7 @@ class Retribution extends Component {
 
     research = () => {
         ajax({
-            url: 'http://localhost/api/retribution/search',
+            url: `${config.api}/retribution/search`,
             type: 'GET',
             done: (json) => {
                 let data = JSON.parse(json);
@@ -24,7 +26,7 @@ class Retribution extends Component {
         let ele = document.querySelector('#retributioninsert');
         let domData = ele.querySelectorAll('input');
         let query = Array.from(domData).map(domElem => `${domElem.name}=${domElem.value}`).join('&');
-        let url = 'http://localhost/api/retribution/insert?' + query;
+        let url = `${config.api}/retribution/insert?${query}`;
         ajax({
             url: url,
             type: 'GET',
@@ -38,7 +40,7 @@ class Retribution extends Component {
         let ele = document.querySelector('#retributiondelete');
         let domData = ele.querySelectorAll('input');
         let query = Array.from(domData).map(domElem => `${domElem.name}=${domElem.value}`).join('&');
-        let url = 'http://localhost/api/retribution/delete?' + query;
+        let url = `${config.api}/retribution/delete?${query}`;
         ajax({
             url: url,
             type: 'GET',
@@ -60,14 +62,14 @@ class Retribution extends Component {
 
     getcolumnvalue = () => {
         let valuelist = [];
-        this.state.data.forEach((data) => {
+        this.state.data.forEach((data, offset) => {
             let value = [];
             for (let key in data) {
                 if(data.hasOwnProperty(key)){
                     value.push(<td className="mdl-data-table__cell--non-numeric" key={key.toString()}>{data[key]}</td>);
                 }
             }
-            valuelist.push(<tr>{value}</tr>);
+            valuelist.push(<tr key={`retri-${offset}`}>{value}</tr>);
         });
         return valuelist;
     }

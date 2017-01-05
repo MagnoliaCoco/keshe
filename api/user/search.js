@@ -3,6 +3,7 @@ let db = require('../../database');
 let userlogin = (req, res) => {
     if ((typeof req.query.loginname === "undefined" )|| (typeof req.query.loginpassword === "undefined" )) {
         console.error('null username or password')
+        res.send('Fuck off.');
     } else {
         db.conn.query({
             sql: 'select * from user where user_name=? and user_password=?',
