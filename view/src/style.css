@@ -1,5 +1,9 @@
-.App {
+.User, .Retribution {
     text-align: center;
+}
+
+#loginform {
+    margin: 0 auto;
 }
 
 table > tr > th, table > tr > td{

@@ -1,14 +1,30 @@
-let db = require('../../database')
+let db = require('../../database');
+
+let userlogin = (req, res) => {
+    if ((typeof req.query.loginname === "undefined" )|| (typeof req.query.loginpassword === "undefined" )) {
+        console.error('null username or password')
+    } else {
+        db.conn.query({
+            sql: 'select * from user where user_name=? and user_password=?',
+            values: [
+                req.query.loginname,
+                req.query.loginpassword
+            ]
+        }, function(err, rows) {
+            res.send(err || rows);
+        });
+    }
+}
 
 let usersearch = (req, res) => {
-    if (typeof req.query.uuid === "undefined") {
+    if (typeof req.query.name === "undefined") {
         db.conn.query('select * from user', function(err, rows) {
             res.send(err || rows);
         });
     } else {
         db.conn.query({
-            sql: 'select * from user where user_uuid=?',
-            values: [req.query.uuid]
+            sql: 'select * from user where user_name=?',
+            values: [req.query.name]
         }, function(err, rows) {
             res.send(err || rows);
         });
@@ -16,7 +32,8 @@ let usersearch = (req, res) => {
 }
 
 let search = {
-    usersearch: usersearch
+    usersearch: usersearch,
+    userlogin: userlogin
 };
 
 module.exports = search;

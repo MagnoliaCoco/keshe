@@ -1,4 +1,4 @@
-let db = require('../database')
+let db = require('../../database');
 
 let research = (req, res) => {
     if (typeof req.query.id === "undefined") {
@@ -15,9 +15,8 @@ let research = (req, res) => {
     }
 }
 
-let retribution = {
-    research: research,
-
+let search = {
+    research: research
 };
 
-module.exports = retribution;
+module.exports = search;

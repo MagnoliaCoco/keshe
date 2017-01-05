@@ -1,4 +1,4 @@
-let db = require('../../database')
+let db = require('../../database');
 
 let userinsert = (req, res) => {
     if (typeof req.query.user_uuid === "undefined") {

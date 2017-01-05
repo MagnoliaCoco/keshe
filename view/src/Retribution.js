@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import ajax from './ajax';
-class User extends Component {
+class Retribution extends Component {
     constructor(){
         super();
         this.state = {
             data: []
         };
-        this.usersearch();
+        this.research();
     }
 
-    usersearch = () => {
+    research = () => {
         ajax({
-            url: 'http://localhost/api/user/search',
+            url: 'http://localhost/api/retribution/search',
             type: 'GET',
             done: (json) => {
                 let data = JSON.parse(json);
@@ -21,10 +21,10 @@ class User extends Component {
     }
 
     handleinsert(event) {
-        let ele = document.querySelector('#userinsert');
+        let ele = document.querySelector('#retributioninsert');
         let domData = ele.querySelectorAll('input');
         let query = Array.from(domData).map(domElem => `${domElem.name}=${domElem.value}`).join('&');
-        let url = 'http://localhost/api/user/insert?' + query;
+        let url = 'http://localhost/api/retribution/insert?' + query;
         ajax({
             url: url,
             type: 'GET',
@@ -35,10 +35,10 @@ class User extends Component {
     }
 
     handledelete(event) {
-        let ele = document.querySelector('#user');
+        let ele = document.querySelector('#retributiondelete');
         let domData = ele.querySelectorAll('input');
         let query = Array.from(domData).map(domElem => `${domElem.name}=${domElem.value}`).join('&');
-        let url = 'http://localhost/api/user/insert?' + query;
+        let url = 'http://localhost/api/retribution/delete?' + query;
         ajax({
             url: url,
             type: 'GET',
@@ -72,23 +72,23 @@ class User extends Component {
         return valuelist;
     }
 
-    userinsert = () => {
-        let insertinputlist = [];
+    reinsert = () => {
+        let inputlist = [];
         for (let key in this.state.data[0]) {
             if(this.state.data[0].hasOwnProperty(key)){
-                insertinputlist.push(
-                    <div key={key.toString()} className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                inputlist.push(
+                    <div key={key.toString()} className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label ">
                         <input className="mdl-textfield__input" type="text" name={key.toString()} key={key.toString()}></input>
                         <lable className="mdl-textfield__label">{key.toString()}: </lable>
                     </div>
                 );
             }
         }
-        insertinputlist.push(<button id="user_sub" className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" key="submit" onClick={() => {this.handleinsert(); return false;}}>Submit</button>)
-        return insertinputlist;
+        inputlist.push(<button id="retribution_sub" className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" key="submit" onClick={() => {this.handleinsert(); return false;}}>Submit</button>)
+        return inputlist;
     }
 
-    userdelete = () => {
+    redelete = () => {
         let deleteinputlist = [];
         deleteinputlist.push(
             <div key="userdelete" className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -104,10 +104,9 @@ class User extends Component {
     render = () => {
         let column = this.getcolumnname();
         let valuelist = this.getcolumnvalue();
-        let insertinputlist = this.userinsert();
-        let deleteinputlist = this.userdelete();
-        return <div><table className="mdl-data-table mdl-js-data-table mdl-shadow--2dp"><tbody>{ column }{ valuelist }</tbody></table><div id="userinsert">{ insertinputlist }</div><div>{ deleteinputlist }</div></div>
+        let inputlist = this.reinsert();
+    return <div><table className="mdl-data-table mdl-js-data-table mdl-shadow--2dp"><tbody>{ column }{ valuelist }</tbody></table>{ inputlist }</div>
     }
 }
 
-export default User;
+export default Retribution;
