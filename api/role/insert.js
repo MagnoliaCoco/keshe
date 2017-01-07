@@ -22,8 +22,4 @@ let roleinsert = (req, res) => {
         });
     }
 }
-let insert = {
-    roleinsert: roleinsert
-};
-
-module.exports = insert;
+module.exports = roleinsert;

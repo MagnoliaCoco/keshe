@@ -1,13 +1,22 @@
 let db = require('../../database');
 
-let reinsert = (req, res) => {
-    if (typeof req.query.re_uuid === "undefined") {
+let reupdate = (req, res) => {
+    if (typeof req.query.reinfo_number === "undefined") {
         db.conn.query('select * from retribution', function(err, rows) {
             res.send(err || rows);
         });
     } else {
         db.conn.query({
-            sql: 'insert into retribution values(?,?,?,?,?,?,?,?)',
+            sql: `update retribution set 
+            reinfo_number=?,
+            area_number=?,
+            publisher_number=?,
+            org_number=?,
+            re_info=?,
+            re_uuid=?,
+            importer_number=?,
+            modify_numebr=?
+            where reinfo_number=?`,
             values: [
                 req.query.reinfo_number, 
                 req.query.area_number, 
@@ -16,7 +25,8 @@ let reinsert = (req, res) => {
                 req.query.re_info, 
                 req.query.re_uuid, 
                 req.query.importer_number, 
-                req.query.modify_numebr
+                req.query.modify_numebr,
+                req.query.reinfo_number
             ]
         }, function(err, rows) {
             res.send(err || rows);
@@ -24,4 +34,4 @@ let reinsert = (req, res) => {
     }
 }
 
-module.exports = reinsert;
+module.exports = reupdate;

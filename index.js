@@ -9,5 +9,5 @@ app.use((req, res, next) => {
 app.use('/api', require('./api/index'));
 app.use('/', express.static('./view/build'));
 
-app.listen(8000);
-console.log('running at localhost:8000');
+app.listen(80);
+console.log('running at localhost:80');

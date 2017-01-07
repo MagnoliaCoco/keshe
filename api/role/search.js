@@ -15,8 +15,4 @@ let rolesearch = (req, res) => {
     }
 }
 
-let search = {
-    rolesearch: rolesearch
-};
-
-module.exports = search;
+module.exports = rolesearch;
